@@ -22,6 +22,8 @@ class CostumerController extends Controller
         ]);
     }
 
+    // fungsi pesan
+
     function pesan(Vehicle $vehicle) {
 
         $costumer = Costumer::all();
