@@ -2,31 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreDriverRequest;
-use App\Models\Costumer;
-use App\Models\Driver;
+use App\Models\Persetujuan;
+use App\Models\Pesanan;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DriverController extends Controller
 {
     function index() {
-
-        $costumer = Costumer::with('driver')->get();
-
-        return view('driver.index',[
-            'costumers' => $costumer
-        ]);
+        return view('driver.index');
     }
 
-    function store(StoreDriverRequest $request) {
+    function pesanan() {
 
-        Driver::create([
-            'costumer_id' => $request->costumer_id,
-            'user_id' => $request->user_id,
-            'confirmed' => $request->confirmed
+        $data = Pesanan::all();
+
+        return view('driver.pesanan',[
+            'pesanans' => $data
         ]);
-
-        return redirect('/driver/index')->with('success', 'Pesanan Berhasil Diterima Silahkan Tunggu');
-
     }
 }

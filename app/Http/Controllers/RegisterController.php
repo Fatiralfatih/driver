@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
     function index() {
-        return view('register.index');
+        return view('auth.register');
     }
 
     function store(RegisterStoreRequest $request) {
@@ -23,7 +23,7 @@ class RegisterController extends Controller
             'password' => $request->password
         ]);
 
-        return redirect('/')->with('success', 'Daftar Berhasil');
+        return redirect('/auth/login')->with('success', 'Daftar Berhasil');
 
     }
 

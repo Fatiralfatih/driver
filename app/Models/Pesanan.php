@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Vehicle;
+use App\Models\User;
+use App\Models\persetujuan;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Costumer;
-use App\Models\Driver;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Pesanan extends Model
 {
@@ -13,14 +15,24 @@ class Pesanan extends Model
 
     protected $guarded = ['id'];
 
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
+    }
+
     public function costumer()
     {
-        return $this->hasMany(Costumer::class);
+        return $this->belongsTo(User::class, 'costumer_id');
     }
 
     public function driver()
     {
-        return $this->hasMany(Driver::class);
+        return $this->belongsTo(User::class, 'driver_id');
+    }
+
+    public function persetujuan()
+    {
+        return $this->hasMany(Persetujuan::class);
     }
 
 

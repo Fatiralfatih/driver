@@ -31,11 +31,6 @@ class Vehicle extends Model
                 )
             );
     }
-
-    public function costumer()
-    {
-        return $this->hasMany(Costumer::class);
-    }
     
     public function category()
     {

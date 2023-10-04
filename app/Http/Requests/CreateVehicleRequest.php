@@ -25,9 +25,8 @@ class CreateVehicleRequest extends FormRequest
             'slug' => 'required',
             'name_vehicle' => 'required',
             'title' => 'required',
-            'body' => 'required',
+            'deskripsi' => 'required',
             'category_id' => 'required',
-            'price' => 'required',
             'status' => 'nullable',
             'gambar' => 'nullable|image'
         ];

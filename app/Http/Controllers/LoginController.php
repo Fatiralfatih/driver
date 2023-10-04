@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     function index() {
-        return view('login.index');
+        return view('auth.login');
     }
 
     public function authenticate(Request $request)
@@ -24,8 +24,15 @@ class LoginController extends Controller
  
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
- 
-            return redirect()->intended('/')->with('success', 'Login Berhasil');
+
+            if(Auth()->user()->role == 'costumer'){
+                return redirect()->intended('/costumer/index')->with('success', 'Login Berhasil');
+            }elseif (Auth()->user()->role == 'driver') {
+                return redirect()->intended('/driver/index')->with('success', 'Login Berhasil');
+            }elseif (Auth()->user()->role == 'admin') {
+                return redirect()->intended('/')->with('success', 'Login Berhasil');
+            }
+            
         }
 
         return redirect()->back()->with('error', 'username atau password tidak sesuai');
@@ -39,6 +46,6 @@ class LoginController extends Controller
     
         $request->session()->regenerateToken();
     
-        return redirect('/login')->with('success', 'Logout Berhasil');
+        return redirect('/auth/login')->with('success', 'Logout Berhasil');
     }
 }

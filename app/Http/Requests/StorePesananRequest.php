@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateVehicleRequest extends FormRequest
+class StorePesananRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,14 +20,14 @@ class UpdateVehicleRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
-    {
+    {   
         return [
-            'gambar' => 'nullable|image',
-            'title' => 'required',
-            'deskripsi' => 'required',
-            'name_vehicle' => 'required',
-            'slug' => 'required',
-            'status' => 'required'
+            'vehicle_id' => 'required',
+            'costumer_id' => 'required',
+            'tujuan' => 'required',
+            'harga' => 'required|numeric|min:0',
+            'pesan' => 'required',
+            'status' => 'nullable'
         ];
     }
 }

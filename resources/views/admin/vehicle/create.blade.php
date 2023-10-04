@@ -1,3 +1,6 @@
+{{-- title vehicle create --}}
+<x-head-title name='vehicle create'/>
+
 <x-layout>
         <div class="intro-y flex items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">
@@ -17,18 +20,16 @@
                         <x-form.input name='name_vehicle'/>
                         <x-form.input name='slug'/>
                         <x-form.input name='title'/>
-                        <x-form.input name='body'/>
-                        <x-form.input name='tujuan'/>
+                        <x-form.input name='deskripsi'/>
 
                         <x-form.option name='category_id'>
 
-                            @foreach ($categories as $category)
-                               <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option selected disabled>Pilih Category</option>
+                            @foreach ($vehicles as $data)
+                               <option value="{{ $data->category->id }}">{{ $data->category->name }}</option>
                             @endforeach
                         
                         </x-form.option>
-
-                        <x-form.input name='price' type='number'/>
 
                         <x-form.checkbox name='status' checked=''/>
                         

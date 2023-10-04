@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('drivers', function (Blueprint $table) {
+        Schema::create('persetujuans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('costumer_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('pesanan_id');
+            $table->foreign('pesanan_id')->references('id')->on('pesanans')->cascadeOnDelete();
+            $table->string('pesan')->nullable()->default('text');
             $table->boolean('confirmed')->default(false);
             $table->timestamps();
         });
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('drivers');
+        Schema::dropIfExists('persetujuans');
     }
 };

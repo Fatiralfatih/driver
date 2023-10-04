@@ -9,10 +9,10 @@
         <meta name="description" content="Icewall admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
         <meta name="keywords" content="admin template, Icewall Admin Template, dashboard template, flat admin template, responsive admin template, web app">
         <meta name="author" content="LEFT4CODE">
-        <title>Dashboard Fatir</title>
         <!-- BEGIN: CSS Assets-->
         <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}" />
         <script src="https://cdn.tailwindcss.com"></script>
+
         <!-- END: CSS Assets-->
     </head>
     <!-- END: Head -->
@@ -861,59 +861,82 @@
                     @auth
                         <nav class="side-nav">
                             <ul>
+                                @if (Auth()->user()->role == 'admin')
+                                    <li>
+                                        <a href="/" 
+                                            class="side-menu {{ Request::is('/') ? 'side-menu--active' : '' }}"
+                                        >
+                                            <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                            <div class="side-menu__title"> Dashboard </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('vehicle.index') }}" 
+                                        class="side-menu {{ Request::is('vehicle/index') ? 'side-menu--active' : '' }}"
+                                        >
+                                            <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                                            <div class="side-menu__title"> Vehicle Data </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        {{-- pesanan page for admin --}}
+                                        <a href="{{ route('pesanan.index') }}" 
+                                        class="side-menu {{ Request::is('pesanan/index') ? 'side-menu--active' : '' }}"
+                                        >
+                                            <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
+                                            <div class="side-menu__title"> Daftar Pesanan </div>
+                                        </a>
+                                    </li>
+                                
+                                @elseif (Auth()->user()->role == 'costumer')
+
                                 <li>
-                                    <a href="javascript:;.html" 
-                                        class="side-menu {{ Request::is('/') ? 'side-menu--active' : '' }}"
-                                    >
-                                        <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
-                                        <div class="side-menu__title">
-                                            Dashboard 
-                                            <div class="side-menu__sub-icon transform rotate-180"> <i data-lucide="chevron-down"></i> </div>
-                                        </div>
+                                        <a href="{{ route('costumer.index') }}" 
+                                        class="side-menu {{ Request::is('costumer/index') ? 'side-menu--active' : '' }}"
+                                        >
+                                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                        <div class="side-menu__title"> Dashboard </div>
                                     </a>
-                                    <ul class="side-menu__sub-open">
-                                        <li>
-                                            <a href="/" 
-                                                class="side-menu {{ Request::is('/admin/index') ? 'side-menu--active' : '' }}"
-                                            >
-                                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                                <div class="side-menu__title"> Admin Page </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('costumer.index') }}" 
-                                                class="side-menu {{ Request::is('/costumer/index') ? 'side-menu--active' : '' }}"
-                                            >
-                                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                                <div class="side-menu__title"> Costumer Page </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('driver.index') }}" 
-                                                class="side-menu {{ Request::is('/driver/index') ? 'side-menu--active' : '' }}"
-                                            >
-                                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                                <div class="side-menu__title"> Driver Page </div>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
                                 <li>
-                                    <a href="{{ route('vehicle.index') }}" 
-                                    class="side-menu {{ Request::is('vehicle/index') ? 'side-menu--active' : '' }}"
+                                        <a href="{{ route('costumer.statusPesanan') }}" 
+                                        class="side-menu {{ Request::is('costumer/status') ? 'side-menu--active' : '' }}"
+                                        >
+                                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                        <div class="side-menu__title"> Status Pesanan </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    {{-- costumer page --}}
+                                    <a href="{{ route('costumer.show') }}" 
+                                    class="side-menu {{ Request::is('costumer/pesan') ? 'side-menu--active' : '' }}"
                                     >
                                         <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
-                                        <div class="side-menu__title"> Vehicle Data </div>
+                                        <div class="side-menu__title"> Kendaaran </div>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="{{ route('pesanan.index') }}" 
-                                    class="side-menu {{ Request::is('pesanan/index') ? 'side-menu--active' : '' }}"
-                                    >
-                                        <div class="side-menu__icon"> <i data-lucide="message-circle"></i> </div>
-                                        <div class="side-menu__title"> Pesanan Data </div>
-                                    </a>
-                                </li>
+
+                                @elseif (Auth()->user()->role == 'driver')
+
+                                    <li>
+                                        <a href="{{ route('driver.index') }}" 
+                                            class="side-menu {{ Request::is('driver/index') ? 'side-menu--active' : '' }}"
+                                        >
+                                            <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                            <div class="side-menu__title"> Dashboard </div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ route('driver.pesanan') }}" 
+                                            class="side-menu {{ Request::is('driver/pesanan') ? 'side-menu--active' : '' }}"
+                                        >
+                                            <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                            <div class="side-menu__title"> Pesanan Costumer </div>
+                                        </a>
+                                    </li>
+
+                                @endif
                             </ul>
                         </nav>
                     @endauth

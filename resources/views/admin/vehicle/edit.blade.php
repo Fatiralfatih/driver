@@ -1,3 +1,6 @@
+{{-- title vehicle edit --}}
+<x-head-title name='vehicle edit'/>
+
 <x-layout>
     <div class="intro-y flex items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
@@ -28,7 +31,6 @@
                                 name="gambar" 
                                 class="w-full"
                                 id="gambar"
-                                required
                                 onchange="previewImage()"
                             >
                         @else
@@ -51,14 +53,6 @@
                     <x-form.input name='name_vehicle' :value="$vehicle->name_vehicle"/>
 
 
-                    <x-form.option name='user_id'>
-
-                        @foreach ($users as $data)
-                            <option value="{{ $data->id }}">{{ $data->name }} | {{ $data->role }} </option>
-                        @endforeach
-                        
-                    </x-form.option>
-
                     <x-form.option name='category_id'>
 
                         @foreach ($categories as $category)
@@ -67,7 +61,7 @@
                         
                     </x-form.option>
 
-                    <x-form.input name='body' :value="$vehicle->body"/>
+                    <x-form.input name='deskripsi' :value="$vehicle->deskripsi"/>
 
                     {{-- status --}}
                     <div class="mt-3 mb-4">

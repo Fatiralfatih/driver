@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreDriverRequest extends FormRequest
+class UpdatePesananRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class StoreDriverRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'costumer_id' => 'required|exists:costumers,id',
-            'user_id' => 'required|exists:users,id',
-            'confirmed' => 'required'
+            'status' => 'nullable',
+            'driver_id' => 'nullable'
         ];
     }
 }

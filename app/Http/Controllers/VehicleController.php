@@ -16,20 +16,24 @@ class VehicleController extends Controller
 
         $vehicle = Vehicle::latest()
                     ->filter(request(['search', 'category']))
-                    ->paginate(5);
+                    ->get();
 
-        return view('vehicle.index',[
-            'vehicle' => $vehicle,
+        return view('admin.vehicle.index',[
+            'vehicles' => $vehicle,
+        ]);
+    }
+
+    function show(Vehicle $vehicle) {
+        return view('admin.vehicle.show',[
+            'vehicles' => $vehicle
         ]);
     }
 
     function create() {
 
-        $category = Category::latest()->get();
-        $vehicle = Vehicle::latest()->get();
+        $vehicle = Vehicle::with(['category'])->get();
 
-        return view('vehicle.create',[
-            'categories' => $category,
+        return view('admin.vehicle.create',[
             'vehicles' => $vehicle
         ]);
     }
@@ -57,14 +61,11 @@ class VehicleController extends Controller
             'name_vehicle' => $request->name_vehicle,
             'slug' => $request->slug,
             'title' => $request->title,
-            'body' => $request->body,
+            'deskripsi' => $request->deskripsi,
             'category_id' => $request->category_id,
-            'price' => $request->price,
             'status' => $status,
             'gambar' => $gambar
         ]);
-
-        
 
         return redirect('/vehicle/index')->with('success', 'Vehicle Berhasil ditambahkan');
 
@@ -74,11 +75,8 @@ class VehicleController extends Controller
 
         $category = Category::with('vehicle')->get();
 
-        $user = User::where('role', 'driver')->get();
-
-        return view('vehicle.edit',[
+        return view('admin.vehicle.edit',[
             'vehicle' => $vehicle,
-            'users' => $user,
             'categories' => $category,
         ]);
     }
@@ -103,9 +101,8 @@ class VehicleController extends Controller
         }
 
         $vehicle->update([
-            'user_id' => $request->user_id,
             'title' => $request->title,
-            'body' => $request->body,
+            'deskripsi' => $request->deskripsi,
             'name_vehicle' => $request->name_vehicle,
             'slug' => $request->slug,
             'category_id' => $request->category_id,

@@ -4,22 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Vehicle;
 use App\Models\Pesanan;
-
-class Costumer extends Model
+class Persetujuan extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function vehicle()
-    {
-        return $this->belongsTo(Vehicle::class);
-    }
-
     public function pesanan()
     {
-        return $this->hasMany(Pesanan::class);
+        return $this->belongsTo(Pesanan::class, 'id',);
     }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'driver_id');
+    }
+
 }

@@ -17,10 +17,9 @@ class VehicleFactory extends Factory
     {
         return [
             'category_id' => mt_rand(1,3),
-            'user_id' => User::factory(),
             'slug' => fake()->slug(),
             'title' => fake()->sentence(),
-            'body' => fake()->paragraph(),
+            'deskripsi' => fake()->paragraph(),
             'name_vehicle' => fake()->word(),
         ];
     }
