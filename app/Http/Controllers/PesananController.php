@@ -61,7 +61,7 @@ class PesananController extends Controller
             
         }
 
-        return redirect('pesanan/index')->with('success', 'pesanan berhasil diupdate');
+        return redirect('pesanan/show/'. $id)->with('success', 'pesanan berhasil diupdate');
 
     }
 

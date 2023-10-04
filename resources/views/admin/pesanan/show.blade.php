@@ -116,7 +116,7 @@
                 {{-- -------Driver Details -----}}
                 {{-- -----------------------------}}
                 <div class="box p-5 rounded-md mt-5">
-                    @if ($pesanan->driver_id)
+                    @if ($pesanan->status == 'success')
                         <div class="flex items-center border-b border-slate-200/60 dark:border-darkmode-400 pb-5 mb-5">
                             <div class="font-medium text-base truncate">
                                 Driver Details
