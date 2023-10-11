@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
-use App\Models\Costumer;
 use App\Models\Pesanan;
 use Illuminate\Http\Request;
 
@@ -15,8 +14,7 @@ class CostumerController extends Controller
 
 
     function show() {
-        $vehicle = Vehicle::where('status', 1)->get();
-
+        $vehicle = Vehicle::with(['pesanan'])->where('status', 1)->get();
         return view('costumer.show',[
             'vehicles' => $vehicle
         ]);

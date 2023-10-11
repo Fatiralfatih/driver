@@ -958,14 +958,14 @@
         @if (Session()->has('success'))
         <div 
         class="shadow-md bg-blue-500 fixed bottom-0 right-0 box border rounded-full py-2 px-7 flex items-center justify-center z-50 mb-10 mr-10">
-            <div class="mr-4 text-white text-sm">{{ Session()->get('success') }}</div>
+            <div class="mr-4 text-white text-sm">{{ ucwords(Session()->get('success')) }}</div>
         </div>
         @endif
 
         @if (Session()->has('error'))
         <div 
         class="shadow-md bg-red-500 fixed bottom-0 right-0 box border rounded-full py-2 px-7 flex items-center justify-center z-50 mb-10 mr-10">
-            <div class="mr-4 text-white text-sm">{{ Session()->get('error') }}</div>
+            <div class="mr-4 text-white text-sm">{{ ucwords(Session()->get('error')) }}</div>
         </div>
         @endif
         

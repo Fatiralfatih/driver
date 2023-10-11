@@ -14,7 +14,7 @@
                 <div class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
                     <div class="flex items-center border-b border-slate-200/60 dark:border-darkmode-400 px-5 py-4">
                         <div class="ml-3 mr-auto">
-                            <a class="font-medium">{{ $vehicle->name_vehicle }}</a>
+                            <a class="font-medium">{{ $vehicle->name_pesanan }}</a>
                             <div class="flex text-slate-500 truncate text-xs mt-0.5"> <a
                                     class="text-primary inline-block truncate"
                                     href="">{{ $vehicle->category->name }}</a> <span class="mx-1">•</span>
@@ -91,4 +91,5 @@
             </div> --}}
             <!-- END: Pagination -->
         </div>
-    </div </x-layout>
+    </div>
+</x-layout>

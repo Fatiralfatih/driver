@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
+            $table->string('invoice', 255)->unique();
             $table->foreignId('vehicle_id')->constrained()->cascadeOnDelete();
             $table->unsignedBigInteger('costumer_id');
             $table->foreign('costumer_id')->references('id')->on('users');
-            $table->unsignedBigInteger('driver_id')->nullable();
-            $table->foreign('driver_id')->references('id')->on('users');
             $table->string('tujuan');
             $table->string('harga');
             $table->string('pesan')->nullable();
-            $table->enum('status', ['success', 'pending', 'confirmed', 'failed'])->default('pending');
+            $table->enum('status', ['success', 'pending', 'confirmed', 'waiting', 'failed'])->default('pending');
             $table->timestamps();
         });
     }

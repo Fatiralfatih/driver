@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\Vehicle;
 use App\Models\User;
-use App\Models\persetujuan;
+use App\Models\Vehicle;
+use App\Models\Permission;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -25,15 +25,8 @@ class Pesanan extends Model
         return $this->belongsTo(User::class, 'costumer_id');
     }
 
-    public function driver()
+    public function permission()
     {
-        return $this->belongsTo(User::class, 'driver_id');
+        return $this->hasMany(Permission::class);
     }
-
-    public function persetujuan()
-    {
-        return $this->hasMany(Persetujuan::class);
-    }
-
-
 }

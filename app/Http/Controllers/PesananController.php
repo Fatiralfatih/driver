@@ -4,46 +4,54 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePesananRequest;
 use App\Http\Requests\UpdatePesananRequest;
+use App\Models\Permission;
 use App\Models\Vehicle;
 use App\Models\Pesanan;
 use App\Models\User;
-use App\Models\Persetujuan;
 use Illuminate\Http\Request;
 
 class PesananController extends Controller
 {
-    function index() {
+    function index()
+    {
 
-        $pesanan = pesanan::with(['costumer','vehicle', 'driver'])->get();
-        return view('admin.pesanan.index',[
+        $pesanan = pesanan::with(['costumer', 'vehicle', 'permission'])->get();
+        return view('admin.pesanan.index', [
             'pesanans' => $pesanan
         ]);
     }
 
-    function store(StorePesananRequest $request) {
-        
+    function store(StorePesananRequest $request)
+    {
+
         Pesanan::create([
+            'invoice' => $request->invoice,
             'vehicle_id' => $request->vehicle_id,
             'status' => $request->status,
             'costumer_id' => $request->costumer_id,
             'tujuan' => $request->tujuan,
             'harga' => $request->harga,
-            'pesan' => $request->pesan
+            'pesan' => $request->pesan,
+            'confirmed' => $request->confirmed
         ]);
 
-    return redirect('costumer/status')->with('success', 'silahkan tunngu konfirmasi admin');
-
+        return redirect('costumer/status')->with('success', 'silahkan tunngu konfirmasi admin');
     }
 
-    function show($id) {
-        $pesanan = Pesanan::where('id', $id)->with(['costumer', 'driver'])->firstOrFail();
+    function show(Pesanan $pesanan)
+    {
+        $pesanan->findOrFail($pesanan->id);
 
-        return view('admin.pesanan.show',[
-            'pesanan' => $pesanan,
+        if($pesanan){
+            $data = $pesanan->load(['vehicle.category', 'costumer', 'permission']);
+        }
+        return view('admin.pesanan.show', [
+            'pesanan' => $data,
         ]);
     }
 
-    function update( UpdatePesananRequest $request,$id) {
+    function update(UpdatePesananRequest $request, $id)
+    {
         $pesanan = Pesanan::where('id', $id)->firstOrFail();
 
         $pesanan->update([
@@ -51,26 +59,19 @@ class PesananController extends Controller
             'status' => $request->status,
         ]);
 
-        if(Auth()->user()->role == 'driver'){
-
-            if($pesanan->status == 'failed'){
-                return redirect('driver/pesanan')->with('success', 'pesanan berhasil ditolak');
-            }elseif($pesanan->status == 'confirmed'){
-                return redirect('driver/pesanan')->with('success', 'pesanan berhasil diterima');
-            }
-            
+        if ($request->status == 'confirmed') {
+            return redirect('pesanan/index')->with('success', 'pesanan berhasil dikonfirmasi');
         }
 
-        return redirect('pesanan/show/'. $id)->with('success', 'pesanan berhasil diupdate');
-
+        return redirect()->back()->with('success', 'Pesanan berhasil di update');
     }
 
-    function delete($id) {
+    function delete($id)
+    {
         $pesanan = Pesanan::where('id', $id)->firstOrFail();
 
-        $pesanan->delete($pesanan);
+        $pesanan->delete();
 
         return redirect('pesanan/index')->with('success', 'data berhasil dihapus');
     }
-
 }

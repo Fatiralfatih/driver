@@ -32,9 +32,7 @@ class LoginController extends Controller
             }elseif (Auth()->user()->role == 'admin') {
                 return redirect()->intended('/')->with('success', 'Login Berhasil');
             }
-            
         }
-
         return redirect()->back()->with('error', 'username atau password tidak sesuai');
     }
 

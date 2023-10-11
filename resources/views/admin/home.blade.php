@@ -3,7 +3,7 @@
 
 <x-layout>
 
-    <div class="grid grid-cols-12 gap-6">
+    <div class="grid grid-cols-8 gap-6">
         <div class="col-span-12 2xl:col-span-9">
             <div class="grid grid-cols-12 gap-6">
                 <!-- BEGIN: General Report -->
@@ -38,7 +38,7 @@
                                             <div class="report-box__indicator bg-danger tooltip cursor-pointer" title="2% Lower than last month"> 2% <i data-lucide="chevron-down" class="w-4 h-4 ml-0.5"></i> </div>
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-medium leading-8 mt-6">3.721</div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">{{count($pesanan)}}</div>
                                     <div class="text-base text-slate-500 mt-1">New Orders</div>
                                 </div>
                             </div>

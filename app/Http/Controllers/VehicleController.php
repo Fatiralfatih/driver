@@ -74,7 +74,6 @@ class VehicleController extends Controller
     function edit(Vehicle $vehicle) {
 
         $category = Category::with('vehicle')->get();
-
         return view('admin.vehicle.edit',[
             'vehicle' => $vehicle,
             'categories' => $category,

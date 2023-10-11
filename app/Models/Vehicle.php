@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Pesanan;
 use App\Models\Category;
-use App\Models\Costumer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -41,5 +41,11 @@ class Vehicle extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function Pesanan()
+    {
+        return $this->hasMany(Pesanan::class);
+    }
+
 
 }

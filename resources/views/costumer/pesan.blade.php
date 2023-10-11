@@ -15,16 +15,14 @@
             <form action="{{ route('pesanan.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="intro-y box p-5">
-                        
-                    <x-form.input name='vehicle_id' :value="$vehicle->id" type='hidden' />
-                    <x-form.input name='status' value='pending' type='hidden' />
-                    <x-form.input name='costumer_id' :value="auth()->user()->id" type='hidden' />
+                    <input type="hidden" name="confirmed" value="1">
+                    <input type="hidden" name="invoice" value="{{ 'INV' . date('dmY' )  . fake()->swiftBicNumber() }}">
+                    <input type="hidden" name="vehicle_id" value="{{ $vehicle->id }}">
+                    <input type="hidden" name="status" value="pending">
+                    <input type="hidden" name="costumer_id" value="{{ Auth()->user()->id }}">
                     <x-form.input name='tujuan'/>
-
                     <x-form.input name='harga' type='number'/>
-
                     <x-form.input name='pesan'/>
-                    
                     <x-form.button name='pesan' link='costumer.show'/>
                 </div>
             </form>

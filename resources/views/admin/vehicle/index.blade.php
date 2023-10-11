@@ -37,7 +37,7 @@
                 </div>
             </div>
             <!-- BEGIN: Data List -->
-            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+            <div class="intro-y col-span-12 overflow-visible lg:overflow-visible">
                 <table class="table table-report -mt-2">
                     <thead>
                         <tr>
@@ -72,9 +72,8 @@
                                 <a href="" class="font-medium whitespace-nowrap">{{ $vehicle->name_vehicle }}</a> 
                                 <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{{ $vehicle->category->name }}</div>
                             </td>
-                            <td class="text-center w-80">{{ $vehicle->title }}</td>
+                            <td class="text-center">{{ $vehicle->title }}</td>
                             <td class="w-40">
-
                                 @if ($vehicle->status)
                                     <div class="flex items-center justify-center text-success"> 
                                         <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> 

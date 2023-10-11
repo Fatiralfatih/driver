@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Persetujuan;
-use App\Models\Pesanan;
 use App\Models\User;
+use App\Models\Pesanan;
+use App\Models\Permission;
+use App\Models\Persetujuan;
 use Illuminate\Http\Request;
 
 class DriverController extends Controller
@@ -15,10 +16,11 @@ class DriverController extends Controller
 
     function pesanan() {
 
-        $data = Pesanan::all();
-
+        $permission = Permission::where('driver_id', Auth()->user()->id)->get();
         return view('driver.pesanan',[
-            'pesanans' => $data
+            'permissions' => $permission
         ]);
     }
+
+    
 }

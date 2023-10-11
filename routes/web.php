@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\ChattingController;
 use App\Http\Controllers\CostumerController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PersetujuanController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\VehicleController;
+use App\Models\Pesanan;
 use App\Models\user;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +30,7 @@ Route::get('/', function () {
         'title' => 'admin',
         'driver' => User::where('role', 'driver')->get(),
         'costumer' => User::where('role', 'costumer')->get(),
+        'pesanan' => Pesanan::all(),
         'vehicle' => Vehicle::all(),
     ]);
 })->name('home')->middleware('auth');
@@ -47,7 +50,7 @@ route::group(['middleware' => 'auth'], function(){
     
     // data pesanan for admin
     Route::get('/pesanan/index', [PesananController::class, 'index'])->name('pesanan.index');
-    Route::get('/pesanan/show/{id}', [PesananController::class, 'show'])->name('pesanan.show');
+    Route::get('/pesanan/show/{pesanan:invoice}', [PesananController::class, 'show'])->name('pesanan.show');
     Route::post('/pesanan/store', [PesananController::class, 'store'])->name('pesanan.store');
     Route::put('/pesanan/update/{id}', [PesananController::class, 'update'])->name('pesanan.update');
     Route::delete('pesanan/delete/{id}', [PesananController::class, 'delete'])->name('pesanan.delete');
@@ -61,7 +64,11 @@ route::group(['middleware' => 'auth'], function(){
     // driver page
     Route::get('/driver/index', [DriverController::class, 'index'])->name('driver.index');
     Route::get('/driver/pesanan', [DriverController::class, 'pesanan'])->name('driver.pesanan');
-
+    
+    // permission
+    Route::get('/permission/change-driver/{id}', [PermissionController::class, 'changeDriver'])->name('permission.changeDriver');
+    Route::post('/permission/store', [PermissionController::class, 'store'])->name('permission.store');
+    Route::put('/permission/update/{id}', [PermissionController::class, 'update'])->name('permission.update');
 });
 
 route::group(['middleware' => 'guest', 'prefix' => 'auth'], function(){
