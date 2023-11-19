@@ -28,10 +28,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin.home',[
         'title' => 'admin',
-        'driver' => User::where('role', 'driver')->get(),
-        'costumer' => User::where('role', 'costumer')->get(),
-        'pesanan' => Pesanan::all(),
-        'vehicle' => Vehicle::all(),
+        'driver' => User::where('role', 'driver')->count(),
+        'costumer' => User::where('role', 'costumer')->count(),
+        'pesanan' => Pesanan::count(),
+        'vehicle' => Vehicle::count(),
     ]);
 })->name('home')->middleware('auth');
 
